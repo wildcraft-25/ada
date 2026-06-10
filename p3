@@ -1,0 +1,63 @@
+3a.)#include <stdio.h>
+void main() 
+{
+ int w[10][10];
+ int n, i, j,k;
+ printf("Enter the number of vertices\n");
+ scanf("%d", &n);
+ printf("Enter the weighted matrix\n");
+ for (i = 0; i <n; i++)
+ for (j =0; j < n; j++)
+ scanf("%d", &w[i][j]);
+ 
+ 
+ for (k = 0; k < n; k++)
+ for (i = 0; i < n; i++)
+ for (j = 0; j < n; j++)
+ w[i][j] = (w[i][j] < w[i][k] + w[k][j]) ? w[i][j] : w[i][k] + w[k][j];
+ printf("The shortest path matrix is\n");
+ for (i = 0; i < n; i++)
+ {
+ for (j = 0; j < n; j++)
+ printf("%d\t ", w[i][j]);
+ printf("\n");
+ }
+
+
+ 3b)
+ #include <stdio.h>
+ void main()
+{
+ int a[10][10],T[10][10];
+ int n, i, j, k;
+ printf("Enter the number of vertices\n");
+ scanf("%d", &n); 
+ printf("Enter the adjacency matrix\n");
+ for (i = 0; i <n; i++)
+ for (j = 0; j < n; j++)
+ scanf("%d", &a[i][j]);
+ for (k = 0; k < n; k++)
+ for (i = 0; i <n; i++)
+ for (j = 0; j < n; j++)
+ a[i][j] = a[i][j] || (a[i][k] && a[k][j]);
+ printf("Transitive Closure is\n");
+ for (i = 0; i <n; i++)
+ {
+ for (j = 0; j <n; j++)
+ printf("%d ", a[i][j]);
+ printf("\n");
+ }
+}
+Output:
+Enter the number of vertices
+4
+Enter the adjacency matrix
+0 1 0 0
+0 0 0 1
+0 0 0 0
+1 0 1 0
+Transitive Closure is
+1 1 1 1 
+1 1 1 1 
+0 0 0 0 
+1 1 1 1
