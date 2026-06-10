@@ -1,0 +1,62 @@
+#include <stdio.h>
+void main()
+{
+ int i,j,ne,n,source,target ,min, mincost=0;
+ int cost[10][10], visited[10];
+ printf("Enter Number of Vertices: ");
+ scanf("%d", &n);
+ 
+ printf("Enter Cost Adjacency Matrix:\n");
+ for (int i = 0; i < n; i++) 
+ {
+ for (int j = 0; j < n; j++) 
+ scanf("%d", &cost[i][j]);
+ }
+ for (int i = 0; i < n; i++)
+ visited[i] = 0;
+ 
+ printf("Enter Source Vertex: ");
+ scanf("%d", &source);
+ 
+ visited[source] = 1;
+ ne=1;
+ while(ne<n)
+ {
+ min = 999;
+ for (i=0;i<n;i++) 
+ {
+ if (visited[i]) 
+ {
+ for (j = 0; j< n; j++) 
+ { 
+ if (cost[i][j]<min && !visited[j])
+ {
+ min = cost[i][j]; 
+ source=i;
+ target =j;
+ }
+ }
+ }
+ }
+ visited[target] = 1;
+ printf(" \n Edge %d (%d->%d) %d ", ne++, source , target, min);
+ mincost=mincost+min;
+ }
+ printf("\nMinimum cost of Spanning Tree: %d\n", mincost);
+} 
+Output:
+ 
+Enter Number of Vertices: 6
+Enter Cost Adjacency Matrix:
+0 12 8 999 999 999
+12 0 9 22 999 11
+8 9 0 16 999 14
+999 22 16 0 15 18
+999 999 999 15 0 3
+999 11 14 18 3 0
+Enter Source Vertex: 0
+Edge 1 (0->2) 8 
+Edge 2 (2->1) 9 
+Edge 3 (1->5) 11 
+Edge 4 (5->4) 3 
+Edge 5 (4->3) 15
