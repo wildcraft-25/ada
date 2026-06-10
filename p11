@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+void merge(int a[], int b[], int c[], int p,int q)
+{
+ int i = 0, j = 0, k = 0;
+ while ((i < p)&& (j < q)) 
+ {
+ if (b[i] <= c[j])
+ a[k++] = b[i++];
+ else
+ a[k++] = c[j++];
+i }
+ while (i < p)
+ a[k++] = b[i++];
+ while (j < q) 
+ 
+ a[k++] = c[j++];
+}
+void mergeSort(int a[], int n) 
+{
+ int mid,i,b[10000],c[10000];
+ if (n >1)
+ { 
+ mid = n / 2;
+ for (i = 0; i < mid; i++)
+ b[i] = a[i];
+ for (i =mid ; i < n; i++)
+ c[i-mid] = a[i];
+ mergeSort(b, mid);
+ mergeSort(c,n - mid);
+ merge(a,b,c,mid,n-mid);
+ }
+}
+void main() 
+{
+ int i,n;
+ int a[30000];
+ long start,stop;
+ double time;
+ printf("Enter the array size n: ");
+ scanf("%d", &n);
+ 
+ printf("\n Enter the array elements");
+ for (i = 0; i < n; i++) 
+ a[i] = rand() % 100;
+ printf(“\n Unsorted array :”);
+ for (i = 0; i < n; i++)
+ printf("%d ", a[i]);
+ start = clock();
+ mergeSort(a,n);
+ stop = clock();
+ 
+ time=(stop - start)/(double) CLOCKS_PER_SEC;
+ 
+ printf("Sorted Array:\n");
+ for (i = 0; i < n; i++)
+ printf("%d ", a[i]);
+ printf("\nTotal time taken =%lf millisec\n", time*1000);
+ }
